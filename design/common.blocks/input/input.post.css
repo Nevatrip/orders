@@ -1,0 +1,204 @@
+block(input) {
+  position: relative;
+  display: flex;
+  color: inherit;
+  padding: 0.5em .3em;
+  box-sizing: border-box;
+  line-height: 1.5em;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  /* Decorative element (inner background) */
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* Цвет одинаковый на всех темах */
+    background-color: rgba(255, 255, 255, .9);
+  }
+
+  elem(box) {
+    position: relative;
+    display: inline-block;
+    user-select: none;
+    font-size: inherit;
+    line-height: inherit;
+
+    -webkit-touch-callout: none;
+  }
+
+  elem(control) {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    outline: none;
+    background: 0 0;
+    font-size: inherit;
+    line-height: inherit;
+
+    -webkit-appearance: none;
+
+    /* лишние отступы у текста */
+    &::-webkit-search-decoration {
+      -webkit-appearance: none
+    }
+
+    /* нативный крестик */
+    &::-webkit-search-cancel-button {
+      display: none
+    }
+
+    &::placeholder {
+      color: #999;
+      text-indent: 0;
+      opacity: 1;
+      text-overflow: ellipsis;
+      font-family: inherit;
+    }
+
+    &::-ms-clear {
+      display: none
+    }
+
+    &:-webkit-autofill {
+      /*color: inherit;*/
+      /*background-color: transparent;*/
+      /*background-clip: padding-box;*/
+      /*border: 1px solid transparent;*/
+      box-sizing: border-box;
+    }
+  }
+
+  elem(icon) {
+    display: inline-block;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  elem(clear) {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    display: none;
+
+    margin: 0;
+    padding: 0;
+
+    user-select: none;
+
+    &:after {
+      font-size: 140%;
+      font-weight: bold;
+      line-height: 1;
+
+      display: block;
+
+      width: 1.2em;
+
+      content: '×';
+      text-align: center;
+    }
+
+    &.mod(visible) {
+      display: block;
+
+      cursor: pointer;
+
+      opacity: 0.2;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  @each $size,
+    $fontSize in
+    (   xs,           s,     m,         l,       xl,     xxl),
+    ( 0.75rem, 0.875rem,  1rem,  1.125rem,  1.25rem,  1.5rem) {
+    mod(size $size) {
+      font-size: $fontSize;
+    }
+  }
+
+  mod(has-clear) elem(control) {
+    text-overflow: ellipsis;
+    padding-right: 2em;
+  }
+
+  mod(focused) {
+    z-index: 1;
+
+    &:before {
+      box-shadow: #969;
+    }
+
+    elem(control) {
+      /* fix ellipsis bug in Chrome */
+      text-overflow: clip;
+    }
+  }
+
+  mod(disabled) {
+    background: rgba(0, 0, 0, 0.08);
+
+    &:before,
+    elem(clear) {
+      display: none
+    }
+
+    elem(box),
+    elem(control) {
+      color: rgba(0, 0, 0, 0.4);
+      cursor: default
+    }
+  }
+
+  mod(invalid) {
+    background-color: red;
+
+    &:before {
+      background-color: #ff9f8e;
+    }
+  }
+
+  mod(width available) {
+    width: 100%
+  }
+
+  mod(type password) elem(control) {
+    text-overflow: clip
+  }
+
+  mod(type search) elem(control)::placeholder {
+    font-family: unset;
+  }
+
+}
+
+block(control-group) {
+  block(input) {
+    &:before {
+      right: 0
+    }
+  }
+
+  & > block(input):last-child,
+  & > :last-child block(input) {
+    &:before {
+      right: 1px
+    }
+  }
+}
+
+
+

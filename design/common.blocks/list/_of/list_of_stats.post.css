@@ -1,0 +1,15 @@
+block(list).mod(of stats) {
+  elem(item) {
+    display: flex;
+  }
+
+  elem(term) {
+    /* font-weight: bold; */
+    flex: 1;
+  }
+
+  elem(definition) {
+    white-space: nowrap;
+
+  }
+}

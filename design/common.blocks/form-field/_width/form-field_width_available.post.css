@@ -1,0 +1,7 @@
+block(form-field).mod(width available) {
+  flex: 1;
+
+  elem(control) {
+    display: block;
+  }
+}

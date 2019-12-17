@@ -1,0 +1,5 @@
+block(dropdown).elem(switcher).mod(switcher link) {
+  text-decoration-line: underline;
+  text-decoration-color: currentColor;
+  text-decoration-style: dashed;
+}

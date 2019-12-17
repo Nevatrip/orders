@@ -1,0 +1,12 @@
+block(select).mod(theme light) {
+  color: #23232C;
+
+  .elem(tick) {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.11 9L12 14.483 5.89 9 5 9.817 12 16l7-6.183'/%3E%3C/svg%3E");
+  }
+
+  .elem(button) {
+    background-color: #fff;
+    color: inherit;
+  }
+}

@@ -1,0 +1,5 @@
+block(dropdown).mod(theme light) {
+  &.block(popup) {
+    background-color: #fff;
+  }
+}

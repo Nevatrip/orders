@@ -1,0 +1,17 @@
+node_modules/
+.DS_Store
+.idea
+.project
+.zip
+.log
+.swp
+.env
+
+.enb/tmp/
+
+bundles/*/*
+!bundles/*/*.bemdecl.js
+
+dist/
+
+static/assets/

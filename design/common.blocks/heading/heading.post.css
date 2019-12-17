@@ -1,0 +1,15 @@
+block(heading) {
+  margin: 0;
+  line-height: 1.2;
+  width: 100%;
+  color: var(--heading-color, inherit);
+  font-weight: 600;
+
+  @each $size, $fontSize in
+    (  xs,        s,      m,    l,      xl,    xxl),
+    (1rem, 1.125rem, 1.5rem, 2rem, 2.25rem, 2.5rem) {
+    .mod(size $size) {
+      font-size: $fontSize;
+    }
+  }
+}

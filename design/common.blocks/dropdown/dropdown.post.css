@@ -1,0 +1,10 @@
+block(dropdown) {
+  @each $size, $width in
+    (   xs,           s,     m,     l,     xl,     xxl),
+    ( 0.75rem, 0.875rem, 20rem, 30rem,  45rem,  1.5rem) {
+    mod(size $size) {
+      width: $width;
+    }
+  }
+  overflow: auto;
+}

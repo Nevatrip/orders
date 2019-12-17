@@ -1,0 +1,10 @@
+block(menu).mod(view header) {
+
+  elem(item) {
+    display: inline-block;
+
+    & + elem(item) {
+      margin-left: 1em;
+    }
+  }
+}

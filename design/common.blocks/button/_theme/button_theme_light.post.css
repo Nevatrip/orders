@@ -1,0 +1,3 @@
+block(button).mod(theme light) {
+  --button-color: #123;
+}

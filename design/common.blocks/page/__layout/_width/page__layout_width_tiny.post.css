@@ -1,0 +1,10 @@
+block(page).elem(layout).mod(width tiny) {
+
+  @media (min-width: 1201px) {
+    width: 740px;
+  }
+
+  @media (min-width: 1441px) {
+    width: 960px;
+  }
+}

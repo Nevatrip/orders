@@ -1,0 +1,11 @@
+block(table).mod(view orders) {
+
+  elem(cell) {
+    border: 1px solid #c2c2c2;
+    padding: 4px;
+  }
+
+  elem(row).mod(status paid) {
+    background-color: #def7d5;
+  }
+}
