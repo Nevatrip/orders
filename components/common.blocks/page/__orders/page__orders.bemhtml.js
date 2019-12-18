@@ -138,7 +138,7 @@ block( 'page' ).elem( 'orders' )( {
                             block: 'text',
                             mods: { format: 'date' },
                             date: event.start,
-                            format: `DD.MM ${ event.allDay ? ', билет на весь день' : '[в] HH:mm' }`,
+                            format: `DD.MM.YYYY ${ event.allDay ? ', билет на весь день' : '[в] HH:mm' }`,
                           },
                         },
                         { tag: 'br' },
@@ -184,7 +184,7 @@ block( 'page' ).elem( 'orders' )( {
                 block: 'text',
                 mods: { format: 'date' },
                 date: order.created,
-                format: 'DD.MM HH:mm',
+                format: 'DD.MM.YYYY HH:mm',
               },
               { tag: 'br' },
               order.status === 'paid'
@@ -194,7 +194,7 @@ block( 'page' ).elem( 'orders' )( {
                     block: 'text',
                     mods: { format: 'date' },
                     date: order.updated,
-                    format: 'DD.MM HH:mm',
+                    format: 'DD.MM.YYYY HH:mm',
                   },
                 ]
                 : 'Ещё не менялся',
