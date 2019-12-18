@@ -104,7 +104,7 @@ block( 'page' ).elem( 'orders' )( {
                     content: [
                       { elem: 'term', content: `${ count } × ${ name }` },
                       // eslint-disable-next-line no-irregular-whitespace
-                      { elem: 'definition', content: ` ${ price > 0 ? `по ${ price } ₽ ` : '' }` },
+                      { elem: 'definition', content: ` по ${ price } ₽` },
                     ],
                   }
                 }
