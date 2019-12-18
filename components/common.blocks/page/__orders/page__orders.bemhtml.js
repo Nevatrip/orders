@@ -22,7 +22,7 @@ block( 'page' ).elem( 'orders' )( {
             content: [
               {
                 block: 'link',
-                url: `/?any=${ order.user.email }`,
+                // url: `/?any=${ order.user.email }`,
                 content: order.user.fullName,
               },
               order.hash ? {
@@ -121,13 +121,23 @@ block( 'page' ).elem( 'orders' )( {
                       content: [
                         {
                           tag: 'legend',
-                          content: {
-                            block: 'link',
-                            title: product.title.ru.name,
-                            content: product.title.ru.name.length > 40 ? `${ product.title.ru.name.substring( 0, 40 ) }…` : product.title.ru.name,
-
-                          // url: `/?where[products.productId]=${ product._id }&offset=0&limit=100&skip=0`,
-                          },
+                          content: [
+                            {
+                              block: 'link',
+                              title: product.title.ru.name,
+                              content: product.title.ru.name.length > 40 ? `${ product.title.ru.name.substring( 0, 40 ) }…` : product.title.ru.name,
+                              target: '_blank',
+                              url: `https://nevatrip.ru/index.php?id=${ product.oldId }`,
+                            },
+                            ' ',
+                            {
+                              block: 'link',
+                              title: 'Открыть в админке',
+                              content: 'ред.',
+                              target: '_blank',
+                              url: `https://admin.nevatrip.ru/desk/tour;${ product._id }`,
+                            },
+                          ],
                         },
                         'Отправление: ',
                         {
@@ -164,7 +174,7 @@ block( 'page' ).elem( 'orders' )( {
                         {
                           content: order.status === 'paid' && number && {
                             block: 'link',
-                            url: `http://localhost:3017/email?order=${ order.id }`,
+                            url: `https://api.nevatrip.ru/orders/${ order.id }/email?hash=${ order.hash }`,
                             target: '_blank',
                             content: `НТ${ number }`,
                           },
