@@ -29,7 +29,7 @@ block( 'page' ).elem( 'orders' )( {
                 block: 'form',
                 mods: { message: 'popup', inline: true },
                 method: 'get',
-                action: `https://api.nevatrip.ru/orders/${ order.id }/email/send`,
+                action: `https://api.test.prahatrip.cz/orders/${ order.id }/email/send`,
                 directions: [ 'right-top' ],
                 content: [
                   {
@@ -89,7 +89,7 @@ block( 'page' ).elem( 'orders' )( {
               } ] = options;
               const _direction = product.directions.find( directionItem => directionItem._key === direction );
               const _tickets = _direction.tickets.map(
-                ( { _key, name, price } ) => {
+                ( { _key, price, category, ticket } ) => {
                   const count = tickets[ _key ] || 0;
                   const cost = price * count;
 
@@ -99,12 +99,12 @@ block( 'page' ).elem( 'orders' )( {
                     elem: 'item',
                     attrs: {
                       style: 'display: flex',
-                      title: `${ price } ₽ × ${ count } = ${ cost } ₽`,
+                      title: `${ price } € × ${ count } = ${ cost } €`,
                     },
                     content: [
-                      { elem: 'term', content: `${ count } × ${ name }` },
+                      { elem: 'term', content: `${ count } × ${ ticket[ 0 ].title.ru } (${ category.title.ru })` },
                       // eslint-disable-next-line no-irregular-whitespace
-                      { elem: 'definition', content: ` по ${ price } ₽` },
+                      { elem: 'definition', content: ` по ${ price } €` },
                     ],
                   }
                 }
@@ -127,7 +127,9 @@ block( 'page' ).elem( 'orders' )( {
                               title: product.title.ru.name,
                               content: product.title.ru.name.length > 40 ? `${ product.title.ru.name.substring( 0, 40 ) }…` : product.title.ru.name,
                               target: '_blank',
-                              url: `https://nevatrip.ru/index.php?id=${ product.oldId }`,
+                              url: '#',
+
+                              //url: `https://nevatrip.ru/index.php?id=${ product.oldId }`,
                             },
                             ' ',
                             {
@@ -135,7 +137,7 @@ block( 'page' ).elem( 'orders' )( {
                               title: 'Открыть в админке',
                               content: 'ред.',
                               target: '_blank',
-                              url: `https://admin.nevatrip.ru/desk/tour;${ product._id }`,
+                              url: `https://admin.prahatrip.cz/desk/tour;${ product._id }`,
                             },
                           ],
                         },
@@ -152,14 +154,14 @@ block( 'page' ).elem( 'orders' )( {
                           },
                         },
                         { tag: 'br' },
-                        `Направление: ${ _direction.title.length > 40 ? `${ _direction.title.substring( 0, 40 ) }…` : _direction.title }`,
+                        `Направление: ${ _direction.title.length > 40 ? `${ _direction.title.ru.substring( 0, 40 ) }…` : _direction.title.ru }`,
                       ],
                     },
                     {
                       tag: 'fieldset',
                       attrs: { style: 'flex: 1' },
                       content: [
-                        { tag: 'legend', content: `Билеты: ${ subSum } ₽` },
+                        { tag: 'legend', content: `Билеты: ${ subSum } €` },
                         {
                           block: 'list',
                           mods: { type: 'description' },
@@ -174,7 +176,7 @@ block( 'page' ).elem( 'orders' )( {
                         {
                           content: order.status === 'paid' && number && {
                             block: 'link',
-                            url: `https://api.nevatrip.ru/orders/${ order.id }/email?hash=${ order.hash }`,
+                            url: `https://api.test.prahatrip.cz/orders/${ order.id }/email?hash=${ order.hash }`,
                             target: '_blank',
                             content: `НТ${ number }`,
                           },
@@ -214,7 +216,7 @@ block( 'page' ).elem( 'orders' )( {
             elem: 'cell',
             content: [
               {
-                content: `Сумма: ${ Amount } ₽`,
+                content: `Сумма: ${ Amount } €`,
               },
               TransactionId
                 ? [ 'Транзакция: ', {
