@@ -157,7 +157,7 @@ modules.define( 'page', [
       bemDom.update( self._elem( 'orders' ).domElem, 'Загрузка…' );
 
       $.ajax( {
-        url: 'https://api.nevatrip.ru/orders',
+        url: 'https://api.test.prahatrip.cz/orders',
         data: {
           filter,
           token: self._apiToken,
@@ -185,7 +185,6 @@ modules.define( 'page', [
                   tickets[ ticketId ].count += countTickets[ ticketId ] || 0;
                 } );
               } );
-
 
               product.directions.forEach( direction => {
                 direction.tickets.forEach( ( { category, name, price, _key } ) => {
@@ -255,7 +254,7 @@ modules.define( 'page', [
 
           console.log( '$.param( filter )', $.param( filter ) );
 
-          const loadUrl = Querystring.Uri.parse( `https://api.nevatrip.ru/orders?${ $.param( { filter } ) }` );
+          const loadUrl = Querystring.Uri.parse( `https://api.test.prahatrip.cz/orders?${ $.param( { filter } ) }` );
 
           loadUrl.replaceParam( 'format', 'csv' );
           loadUrl.replaceParam( 'token', self._apiToken );
@@ -290,14 +289,14 @@ modules.define( 'page', [
                         elem: 'item',
                         content: [
                           { elem: 'term', content: { block: 'text', mods: { weight: 'bold' }, content: `${ part.title }:` } },
-                          { elem: 'definition', content: `${ stat[ part.status ].count } ${ getNoun( stat[ part.status ].count, 'заказ', 'заказа', 'заказов' ) } на ${ stat[ part.status ].sum } ₽` },
+                          { elem: 'definition', content: `${ stat[ part.status ].count } ${ getNoun( stat[ part.status ].count, 'заказ', 'заказа', 'заказов' ) } на ${ stat[ part.status ].sum } €` },
                         ],
                       } : '',
                       stat[ part.status ].count ? part.tickets.map( ticket => ( {
                         elem: 'item',
                         content: [
                           { elem: 'term', content: `${ ticket.count } × ${ ticket.title }` },
-                          { elem: 'definition', content: `${ ticket.sum } ₽` },
+                          { elem: 'definition', content: `${ ticket.sum } €` },
                         ],
                       } ) ) : '',
                     ] ),

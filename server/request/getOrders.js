@@ -10,7 +10,7 @@ const getOrders = async params => {
     ...params,
   }
 
-  const orders = new Request( 'https://api.nevatrip.ru/orders', { filter } );
+  const orders = new Request( 'https://api.test.prahatrip.cz/orders', { filter } );
   const response = await orders.request();
 
   return response;
