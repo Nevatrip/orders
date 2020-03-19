@@ -1,5 +1,6 @@
 const imageUrlBuilder = require( '@sanity/image-url' );
 const MarkdownBemjson = require( 'markdown-bemjson' );
+const { zonedTimeToUtc } = require( 'date-fns-tz' );
 
 const builder = imageUrlBuilder(
   {
@@ -35,7 +36,13 @@ block( 'root' ).replace()( ( node, ctx ) => {
 
   node._urlFor = source => builder.image( source );
   node._fromMarkdown = markdown => markdownBemjson.convert( markdown );
+  // node._zonedTimeToUtc = { zonedTimeToUtc };
+  node._zonedTimeToUtc = ( date, timeZone ) => zonedTimeToUtc( date, timeZone );
 
+  console.log( '∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞' );
+  console.log( 'node._zonedTimeToUtc: ', node._zonedTimeToUtc( '2018-09-01 18:01:36.386', 'Europe/Prague' ) );
+
+  console.log( 'ˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆ' );
   return {
     block: 'page',
     title: data.title || config.appName,
