@@ -164,7 +164,7 @@ modules.define( 'page', [
           token: self._apiToken,
         },
         success ( response ) {
-          console.log( 'response', response );
+          // console.log( 'response', response );
           // console.log( 'filter', filter );
 
           const stat = response.reduce( ( acc, order ) => {
