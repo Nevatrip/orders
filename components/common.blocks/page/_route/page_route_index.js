@@ -146,6 +146,7 @@ modules.define( 'page', [
           sum: true,
           isFullDiscount: true,
           hash: true,
+          lang: true,
         },
         offset: 0,
         limit: 1,
@@ -163,7 +164,7 @@ modules.define( 'page', [
           token: self._apiToken,
         },
         success ( response ) {
-          // console.log( 'response', response );
+          console.log( 'response', response );
           // console.log( 'filter', filter );
 
           const stat = response.reduce( ( acc, order ) => {

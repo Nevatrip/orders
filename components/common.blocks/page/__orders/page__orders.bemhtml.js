@@ -155,6 +155,8 @@ block( 'page' ).elem( 'orders' )( {
                         },
                         { tag: 'br' },
                         `Направление: ${ _direction.title.length > 40 ? `${ _direction.title.ru.substring( 0, 40 ) }…` : _direction.title.ru }`,
+                        { tag: 'br' },
+                        `Язык: ${ order.lang }`,
                       ],
                     },
                     {
