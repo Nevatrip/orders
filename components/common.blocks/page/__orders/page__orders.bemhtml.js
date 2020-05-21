@@ -22,6 +22,7 @@ block( 'page' ).elem( 'orders' )( {
             content: [
               {
                 block: 'link',
+
                 // url: `/?any=${ order.user.email }`,
                 content: order.user.fullName,
               },
@@ -79,7 +80,8 @@ block( 'page' ).elem( 'orders' )( {
           },
           {
             elem: 'cell',
-            content: order.products.map( ( { product, options } ) => {
+            content: order.products.map( ( { product, options = [] } ) => {
+              if ( options.length === 0 ) return null;
               let subSum = 0;
               const [ {
                 direction,
@@ -88,6 +90,9 @@ block( 'page' ).elem( 'orders' )( {
                 event,
               } ] = options;
               const _direction = product.directions.find( directionItem => directionItem._key === direction );
+
+              if ( !_direction ) return null;
+
               const _tickets = _direction.tickets.map(
                 ( { _key, price, category, ticket } ) => {
                   const count = tickets[ _key ] || 0;

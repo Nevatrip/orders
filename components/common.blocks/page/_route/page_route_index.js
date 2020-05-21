@@ -171,8 +171,10 @@ modules.define( 'page', [
 
             acc[ order.status ].count++;
             acc[ order.status ].sum += order.sum || 0;
-            order.products.forEach( ( { options, product } ) => {
+            order.products.forEach( ( { options = [], product = {} } ) => {
               const countTickets = {};
+
+              console.log( `options`, options );
 
               options.forEach( direction => {
                 Object.keys( direction.tickets ).forEach( ticketId => {
@@ -185,6 +187,8 @@ modules.define( 'page', [
                   tickets[ ticketId ].count += countTickets[ ticketId ] || 0;
                 } );
               } );
+
+              if ( !product.hasOwnProperty( 'directions' ) ) return;
 
               product.directions.forEach( direction => {
                 direction.tickets.forEach( ( { category, name, price, _key } ) => {
