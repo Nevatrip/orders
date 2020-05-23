@@ -174,8 +174,6 @@ modules.define( 'page', [
             order.products.forEach( ( { options = [], product = {} } ) => {
               const countTickets = {};
 
-              console.log( `options`, options );
-
               options.forEach( direction => {
                 Object.keys( direction.tickets ).forEach( ticketId => {
                   countTickets[ ticketId ] = direction.tickets[ ticketId ];
@@ -191,10 +189,10 @@ modules.define( 'page', [
               if ( !product.hasOwnProperty( 'directions' ) ) return;
 
               product.directions.forEach( direction => {
-                direction.tickets.forEach( ( { category, name, price, _key } ) => {
+                direction.tickets.forEach( ( { category, name, price, _key, ..._ } ) => {
                   tickets[ _key ] = tickets[ _key ] || {};
                   tickets[ _key ].sum += ( countTickets[ _key ] || 0 ) * parseInt( price, 10 );
-                  tickets[ _key ].title = `${ category.title } ${ name }`;
+                  tickets[ _key ].title = `${ category.title.ru } ${ name || _.ticket.map( ( { title } ) => title.ru ).join( ' + ' ) }`;
                 } );
               } );
             } );
@@ -256,8 +254,6 @@ modules.define( 'page', [
             return five;
           }
 
-          console.log( '$.param( filter )', $.param( filter ) );
-
           const loadUrl = Querystring.Uri.parse( `https://api.test.prahatrip.cz/orders?${ $.param( { filter } ) }` );
 
           loadUrl.replaceParam( 'format', 'csv' );
@@ -299,7 +295,7 @@ modules.define( 'page', [
                       stat[ part.status ].count ? part.tickets.map( ticket => ( {
                         elem: 'item',
                         content: [
-                          { elem: 'term', content: `${ ticket.count } × ${ ticket.title }` },
+                          { elem: 'term', content: `${ ticket.count || 0 } × ${ ticket.title }` },
                           { elem: 'definition', content: `${ ticket.sum } €` },
                         ],
                       } ) ) : '',

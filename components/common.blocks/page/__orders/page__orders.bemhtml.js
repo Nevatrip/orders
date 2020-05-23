@@ -81,7 +81,7 @@ block( 'page' ).elem( 'orders' )( {
           {
             elem: 'cell',
             content: order.products.map( ( { product, options = [] } ) => {
-              if ( options.length === 0 ) return null;
+              if ( !product || options.length === 0 ) return null;
               let subSum = 0;
               const [ {
                 direction,
@@ -159,7 +159,9 @@ block( 'page' ).elem( 'orders' )( {
                           },
                         },
                         { tag: 'br' },
-                        `Направление: ${ _direction.title.length > 40 ? `${ _direction.title.ru.substring( 0, 40 ) }…` : _direction.title.ru }`,
+                        _direction.title
+                          ? `Направление: ${ _direction.title.length > 40 ? `${ _direction.title.ru.substring( 0, 40 ) }…` : _direction.title.ru }`
+                          : 'Неизвестное направление',
                       ],
                     },
                     {
