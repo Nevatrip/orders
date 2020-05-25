@@ -89,7 +89,7 @@ block( 'page' ).elem( 'orders' )( {
                 number,
                 event,
               } ] = options;
-              const _direction = product.directions.find( directionItem => directionItem._key === direction );
+              const _direction = product.directions.find( directionItem => directionItem._key === direction._key );
 
               if ( !_direction ) return null;
 
@@ -116,6 +116,7 @@ block( 'page' ).elem( 'orders' )( {
               );
 
               if ( !event ) return '';
+
 
               return [
                 {
